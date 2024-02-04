@@ -7,7 +7,7 @@ trigger:
 - develop
 
 pool:
-  vmImage: test1
+  name: test1
   demands:
   - agent.name -equals selfHostedAgent1 
 
