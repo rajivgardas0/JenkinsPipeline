@@ -1,21 +1,82 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - develop
 
 pool:
   name: test1
   demands:
-  - agent.name -equals selfHostedAgent1 
+  - agent.name -equals selfHostedAgent1
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+stages:
+- stage: Checkout
+  displayName: 'Checkout'
+  jobs:
+  - job: Checkout
+    displayName: 'Checkout'
+    steps:
+    - checkout: self
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- stage: Build
+  displayName: 'Build'
+  jobs:
+  - job: Build
+    displayName: 'Build'
+    steps:
+    - script: 
+        echo "Building..."
+      displayName: 'Build'
+    # Add your build commands here
+
+- stage: Test
+  displayName: 'Test'
+  jobs:
+  - job: Test
+    displayName: 'Test'
+    steps:
+    - script: 
+        echo "Testing..."
+      displayName: 'Test'
+    # Add your test commands here
+
+- stage: Scan
+  displayName: 'Scan'
+  jobs:
+  - job: Scan
+    displayName: 'Scan'
+    steps:
+    - script: 
+        echo "Scanning..."
+      displayName: 'Scan'
+    # Add your code scanning commands here
+
+- stage: Push to Artifactory
+  displayName: 'Push to Artifactory'
+  jobs:
+  - job: PushToArtifactory
+    displayName: 'Push to Artifactory'
+    steps:
+    - script: 
+        echo "Pushing to Artifactory..."
+      displayName: 'Push to Artifactory'
+    # Add commands to push artifacts to Artifactory
+
+- stage: Deploy
+  displayName: 'Deploy'
+  jobs:
+  - job: Deploy
+    displayName: 'Deploy'
+    steps:
+    - script: 
+        echo "Deploying..."
+      displayName: 'Deploy'
+    # Add your deployment commands here
+
+# Define actions to be taken after the pipeline completes
+post:
+  success:
+    - script: 
+        echo "Pipeline successfully completed!"
+      displayName: 'Success'
+  failure:
+    - script: 
+        echo "Pipeline failed. Please check the logs for details."
+      displayName: 'Failure'
