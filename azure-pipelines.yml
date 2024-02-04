@@ -70,13 +70,4 @@ stages:
       displayName: 'Deploy'
     # Add your deployment commands here
 
-# Define actions to be taken after the pipeline completes
-post:
-  success:
-    - script: 
-        echo "Pipeline successfully completed!"
-      displayName: 'Success'
-  failure:
-    - script: 
-        echo "Pipeline failed. Please check the logs for details."
-      displayName: 'Failure'
+
