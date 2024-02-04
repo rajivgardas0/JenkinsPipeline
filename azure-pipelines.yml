@@ -48,11 +48,11 @@ stages:
       displayName: 'Scan'
     # Add your code scanning commands here
 
-- stage: Push to Artifactory
-  displayName: 'Push to Artifactory'
+- stage: Push_to_Artifactory
+  displayName: 'Push_to_Artifactory'
   jobs:
   - job: PushToArtifactory
-    displayName: 'Push to Artifactory'
+    displayName: 'Push_to_Artifactory'
     steps:
     - script: 
         echo "Pushing to Artifactory..."
